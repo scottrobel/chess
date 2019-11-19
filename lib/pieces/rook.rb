@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # can move up, down, right and left
-class Rook
+class Rook < Piece
   BEHAVIORS = [
     {
       start_condition: 'none',
@@ -11,9 +11,4 @@ class Rook
       break_before: 'own_piece'
     }
   ].freeze
-  attr_reader :position, :color
-  def initialize(position, color)
-    @position = Position.new(position)
-    @color = color
-  end
 end
