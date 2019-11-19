@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'pry'
+# contains a position and can eturn positions around ity
 class Position
   attr_reader :position
   def initialize(position)
@@ -39,6 +39,3 @@ class Position
     position
   end
 end
-position = Position.new([1, 1])
-tr = position.top_right
-binding.pry
