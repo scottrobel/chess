@@ -18,6 +18,16 @@ class Position
     end
   end
 
+  %w[top bottom].each do |vertical_direction|
+    %w[right left].each do |horizontal_direction|
+      method_name = "#{vertical_direction}_#{horizontal_direction}"
+      define_method(method_name) do
+        shift_one = method("#{vertical_direction}".to_sym).call
+        shift_one.method("#{horizontal_direction}".to_sym).call
+      end
+    end
+  end
+
   private
 
   def neighbor_position(direction)
@@ -35,4 +45,6 @@ class Position
     position
   end
 end
+position = Position.new([1,1])
+tr = position.top_right
 binding.pry
