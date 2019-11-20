@@ -11,6 +11,7 @@ class Bishop < Piece
       break_before: 'own_piece'
     }
   ].freeze
+
   def to_s
     ColorizedString["\s♗\s"].colorize(color: @color.to_sym)
   end
