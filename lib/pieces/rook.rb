@@ -5,12 +5,15 @@ class Rook < Piece
   BEHAVIORS = [
     {
       start_condition: 'none',
-      iterations: 'until_break',
       directions: %w[top bottom right left],
-      take_oponent: true,
-      break_before: 'own_piece'
+      break_before: 'own_piece',
+      take_opponent: true
     }
   ].freeze
+
+  def behaviors
+    BEHAVIORS
+  end
 
   def to_s
     ColorizedString["\s♖\s"].colorize(color: @color.to_sym)

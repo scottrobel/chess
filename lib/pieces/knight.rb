@@ -15,10 +15,14 @@ class Knight < Piece
        'bottom bottom_left',
        'left top_left',
        'left bottom_left'],
-      take_oponent: true,
+      take_opponent: true,
       break_before: 'own_piece'
     }
   ].freeze
+
+  def behaviors
+    BEHAVIORS
+  end
 
   def to_s
     ColorizedString["\s♘\s"].colorize(color: @color.to_sym)

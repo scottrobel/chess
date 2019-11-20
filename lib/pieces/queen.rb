@@ -5,7 +5,7 @@ class Queen < Piece
   BEHAVIORS = [
     {
       start_condition: 'none',
-      iterations: 'until_break',
+      has_iterator: false,
       directions:
       %w[top
          bottom

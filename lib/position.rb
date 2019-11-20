@@ -2,19 +2,19 @@
 
 # contains a position and can eturn positions around ity
 class Position
-  attr_reader :position
-  def initialize(position)
-    @position = position
+  attr_reader :value
+  def initialize(value)
+    @value = value
   end
 
   def to_s
-    @position
+    @value
   end
 
   %w[top bottom right left].each do |direction|
     define_method(direction.to_s) do
-      position = neighbor_position(direction)
-      Position.new(position)
+      value = neighbor_position(direction)
+      Position.new(value)
     end
   end
 
@@ -31,7 +31,7 @@ class Position
   private
 
   def neighbor_position(direction)
-    position = Marshal.load(Marshal.dump(@position))
+    position = Marshal.load(Marshal.dump(@value))
     position[1] += 1 if direction == 'top'
     position[1] -= 1 if direction == 'bottom'
     position[0] += 1 if direction == 'right'
