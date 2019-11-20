@@ -20,4 +20,8 @@ class King < Piece
       break_before: 'opponent_moves'
     }
   ].freeze
+
+  def to_s
+    ColorizedString["\s♔\s"].colorize(color: @color.to_sym)
+  end
 end
