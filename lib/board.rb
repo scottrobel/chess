@@ -16,4 +16,12 @@ class Board
       Pawn.new([x_index, 6], 'white')
     end
   end
+
+  def back_row(color, row)
+    positions = [Rook, Knight, Bishop,
+      Queen, King, Bishop, Knight, Rook]
+    Array.new(8) do |x_index|
+      positions[x_index].new([x_index, row], color)
+    end
+  end
 end

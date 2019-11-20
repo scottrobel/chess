@@ -5,6 +5,11 @@ require 'pry'
 require './lib/position'
 require './lib/pieces/piece'
 require './lib/pieces/pawn'
+require './lib/pieces/bishop'
+require './lib/pieces/king'
+require './lib/pieces/queen'
+require './lib/pieces/rook'
+require './lib/pieces/knight'
 require './lib/board'
 
 describe Board do
@@ -21,6 +26,18 @@ describe Board do
       end
       @new_board.game_board[6].each do |pawn|
         expect(pawn.class).to eql(Pawn)
+      end
+    end
+  end
+  describe '#back_row' do
+    before(:each) do
+      @back_row = @new_board.send(:back_row, 'black', 0)
+      @back_row_classes = [Rook, Knight, Bishop,
+      Queen, King, Bishop, Knight, Rook]
+    end
+    it 'returns the correct pieces' do
+      @back_row.each_with_index do |piece, index|
+        expect(piece.class).to eql(@back_row_classes[index])
       end
     end
   end
