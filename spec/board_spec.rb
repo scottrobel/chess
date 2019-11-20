@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'colorized_string'
 require 'pry'
 require './lib/position'
@@ -11,7 +13,7 @@ describe Board do
   end
   describe '#set_up_pawns' do
     before(:each) do
-      @new_board.set_up_pawns
+      @new_board.send(:set_up_pawns)
     end
     it 'sets up pawns' do
       @new_board.game_board[1].each do |pawn|

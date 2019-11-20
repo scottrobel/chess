@@ -6,6 +6,8 @@ class Board
     @game_board = Array.new(8) { Array.new(8) { "\s" * 3 } }
   end
 
+  private
+
   def set_up_pawns
     @game_board[1] = Array.new(8) do |x_index|
       Pawn.new([x_index, 1], 'black')

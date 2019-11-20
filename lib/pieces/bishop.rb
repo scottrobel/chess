@@ -12,6 +12,6 @@ class Bishop < Piece
     }
   ].freeze
   def to_s
-    ColorizedString["\s♗\s"].colorize(:color => @color.to_sym)
+    ColorizedString["\s♗\s"].colorize(color: @color.to_sym)
   end
 end
