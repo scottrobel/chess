@@ -3,7 +3,6 @@
 # contains all pieces and methods to return data about
 # the pieces on the board
 class Board
-  attr_reader :game_board
   def initialize
     @game_board = Array.new(8) { Array.new(8) { "\s" * 3 } }
     set_up_pawns
@@ -12,6 +11,12 @@ class Board
   end
 
   private
+
+  def player_piece?(color, position)
+    position_value = position.value
+    piece = @game_board[position_value[1]][position_value[0]]
+    piece != "\s" * 3 && piece.color == color
+  end
 
   def player_positions(color)
     @game_board.map do |row|

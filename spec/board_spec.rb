@@ -16,16 +16,6 @@ describe Board do
   before(:each) do
     @new_board = Board.new
   end
-  describe '#set_up_pawns' do
-    it 'sets up pawns' do
-      @new_board.game_board[1].each do |pawn|
-        expect(pawn.class).to eql(Pawn)
-      end
-      @new_board.game_board[6].each do |pawn|
-        expect(pawn.class).to eql(Pawn)
-      end
-    end
-  end
   describe '#back_row' do
     before(:each) do
       @back_row = @new_board.send(:back_row, 'black', 0)
@@ -67,6 +57,11 @@ describe Board do
   describe '#player_positions' do
     it 'can get white positions' do
       expect(@new_board.send(:player_positions, 'white').size).to eql(16)
+    end
+  end
+  describe 'player_piece?' do
+    it 'displays true if its the players piece' do
+      expect(@new_board.send(:player_piece?, 'black', Position.new([0,0]))).to eql(true)
     end
   end
 end
