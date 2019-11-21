@@ -59,13 +59,14 @@ class Board
 
   def display_board(color_array = default_color_array)
     print "\n"
+    top_index = ("\s" * 2) + (0..7).to_a.map{|num| num.to_s.center(3)}.join + "\n"
     board = @game_board.map.with_index do |row, row_index|
-      row.map.with_index do |piece, piece_index|
+      "#{row_index}\s" + row.map.with_index do |piece, piece_index|
         color = color_array[row_index][piece_index]
         ColorizedString[piece.to_s].colorize(background: color.to_sym)
       end.join + "\n"
     end.join
-    print board
+    print top_index + board
   end
 
   def possible_moves(piece_position)
