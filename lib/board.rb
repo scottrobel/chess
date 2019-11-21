@@ -12,14 +12,70 @@ class Board
 
   private
 
+  def player_turn(player_color)
+    position = select_piece(player_color)
+
+  end
+
+  def select_piece(player_color)
+    print "\nenter the coordnate of the piece\nthat you would like to move.\n"
+    print "in the format number,number\n"
+    print "eg. 5,1\n"
+    user_input = gets.chomp.match(/(\d),(\d)/)
+    if user_input.nil?
+      print "invalid input\n"
+      return select_piece(player_color)
+    end
+    position = Position.new(user_input.captures.map(&:to_i))
+    if !on_board?(position)
+      print "That piece is not on the board\n"
+      return select_piece(player_color)
+    end
+    if position_empty(position)
+      print "There is no piece in that position\n"
+      return select_piece(player_color)
+    end
+    if !player_piece?(player_color, position)
+      print "This piece is not yours\n"
+      return select_piece(player_color)
+    end
+    if !piece_moveable?(position)
+      print "This piece cannot move anywhere\n"
+      return select_piece(player_color)
+    end
+    position
+  end
+
+  def select_position_to_move(piece_position)
+    print "\nenter the coordnate you would like to move this piece\n"
+    print "in the format number,number\n"
+    print "eg. 5,1\n"
+    possible_moves = possible_moves(piece_position)
+    user_input = gets.chomp.match(/(\d),(\d)/)
+    if user_input.nil?
+      print "invalid input\n"
+      return select_position_to_move(piece_position)
+    end
+    selected_position = user_input.captures.map(&:to_i)
+    unless possible_moves.any?{|position| position.value == selected_position}
+      print "That is not a possible move"
+      return select_position_to_move(piece_position)
+    end
+    Position.new(selected_position)
+  end
+
   def piece_moveable?(position)
     possible_moves(position).size != 0
+  end
+
+  def position_empty(position)
+    position_to_value(position) == "\s" * 3
   end
 
   def player_piece?(color, position)
     position_value = position.value
     piece = @game_board[position_value[1]][position_value[0]]
-    piece != "\s" * 3 && piece.color == color
+    piece.color == color
   end
 
   def player_positions(color)
@@ -140,7 +196,7 @@ class Board
   end
 
   def opponent_piece?(value, player_color)
-    !empty_space?(value) && value.color = !player_color
+    !empty_space?(value) && value.color == !player_color
   end
 
   def on_board?(position)
