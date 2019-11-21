@@ -5,7 +5,6 @@ class Bishop < Piece
   BEHAVIORS = [
     {
       start_condition: 'none',
-      has_iterator: false,
       directions: %w[top_right top_left bottom_right bottom_left],
       take_oponent: true
     }

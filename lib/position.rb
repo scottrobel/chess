@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# contains a position and can eturn positions around ity
+# contains a position and can return positions around it
 class Position
   attr_reader :value
   def initialize(value)

@@ -13,6 +13,19 @@ class Board
 
   private
 
+  def display_board
+    print "\n"
+    color = 'light_black'
+    board = @game_board.map do |row|
+      color = color == 'light_black' ? 'red' : 'light_black'
+      row.map do |piece|
+        color = color == 'light_black' ? 'red' : 'light_black'
+        ColorizedString[piece.to_s].colorize(background: color.to_sym)
+      end.join + "\n"
+    end.join
+    print board
+  end
+
   def possible_moves(piece_position)
     piece = position_to_value(piece_position)
     player_color = piece.color

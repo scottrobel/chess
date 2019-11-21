@@ -47,4 +47,9 @@ describe Board do
       @new_board.send(:possible_moves, Position.new([1, 0]))
     end
   end
+  describe '#display_board' do
+    it 'displays board' do
+      @new_board.send(:display_board)
+    end
+  end
 end
