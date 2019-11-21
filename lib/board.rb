@@ -13,13 +13,19 @@ class Board
 
   private
 
-  def display_board
+  def default_color_array
+    color_array = Array.new(8) do |row_i|
+      Array.new(8) do |piece_i|
+        (row_i + piece_i).even? ? :red : :light_black
+      end
+    end
+  end
+
+  def display_board(color_array = default_color_array)
     print "\n"
-    color = 'light_black'
-    board = @game_board.map do |row|
-      color = color == 'light_black' ? 'red' : 'light_black'
-      row.map do |piece|
-        color = color == 'light_black' ? 'red' : 'light_black'
+    board = @game_board.map.with_index do |row, row_index|
+      row.map.with_index do |piece, piece_index|
+        color = color_array[row_index][piece_index]
         ColorizedString[piece.to_s].colorize(background: color.to_sym)
       end.join + "\n"
     end.join
