@@ -59,9 +59,14 @@ describe Board do
   end
   describe '#make_move' do
     it 'can move a pawn' do
-      @new_board.send(:make_move, Position.new([0, 1]), Position.new([0,3]))
+      @new_board.send(:make_move, Position.new([0, 1]), Position.new([0, 3]))
       @new_board.send(:display_possible_moves, Position.new([0, 3]))
       @new_board.send(:display_possible_moves, Position.new([0, 0]))
+    end
+  end
+  describe '#player_positions' do
+    it 'can get white positions' do
+      expect(@new_board.send(:player_positions, 'white').size).to eql(16)
     end
   end
 end

@@ -13,6 +13,16 @@ class Board
 
   private
 
+  def player_positions(color)
+    @game_board.map do |row|
+      row.select do |position|
+        position != "\s" * 3 && position.color == color
+      end.map do |piece|
+        piece.position
+      end
+    end.flatten
+  end
+
   def make_move(position_of_piece, position_to_move)
     piece = position_to_value(position_of_piece)
     piece.position = position_to_move
