@@ -12,6 +12,10 @@ class Board
 
   private
 
+  def piece_moveable?(position)
+    possible_moves(position).size != 0
+  end
+
   def player_piece?(color, position)
     position_value = position.value
     piece = @game_board[position_value[1]][position_value[0]]

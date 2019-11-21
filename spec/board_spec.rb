@@ -60,8 +60,17 @@ describe Board do
     end
   end
   describe 'player_piece?' do
-    it 'displays true if its the players piece' do
+    it 'returns true if its the players piece' do
       expect(@new_board.send(:player_piece?, 'black', Position.new([0,0]))).to eql(true)
+    end
+  end
+
+  describe 'piece_moveable' do
+    it 'returns false when a rook is trapped' do
+      expect(@new_board.send(:piece_moveable?, Position.new([0,0]))).to eql(false)
+    end
+    it 'returns true when a piece is moveable' do
+      expect(@new_board.send(:piece_moveable?, Position.new([0,1]))).to eql(true)
     end
   end
 end
