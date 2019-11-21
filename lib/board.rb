@@ -13,8 +13,12 @@ class Board
   private
 
   def player_turn(player_color)
+    display_board
     position = select_piece(player_color)
-
+    display_possible_moves(position)
+    position_to_move = select_position_to_move(position)
+    make_move(position, position_to_move)
+    display_board
   end
 
   def select_piece(player_color)
@@ -23,27 +27,31 @@ class Board
     print "eg. 5,1\n"
     user_input = gets.chomp.match(/(\d),(\d)/)
     if user_input.nil?
-      print "invalid input\n"
+      red_output("invalid input\n")
       return select_piece(player_color)
     end
     position = Position.new(user_input.captures.map(&:to_i))
     if !on_board?(position)
-      print "That piece is not on the board\n"
+      red_output("That piece is not on the board\n")
       return select_piece(player_color)
     end
     if position_empty(position)
-      print "There is no piece in that position\n"
+      red_output("There is no piece in that position\n")
       return select_piece(player_color)
     end
     if !player_piece?(player_color, position)
-      print "This piece is not yours\n"
+      red_output("This piece is not yours\n")
       return select_piece(player_color)
     end
     if !piece_moveable?(position)
-      print "This piece cannot move anywhere\n"
+      red_output("This piece cannot move anywhere\n")
       return select_piece(player_color)
     end
     position
+  end
+
+  def red_output(string)
+    print ColorizedString[string].colorize(color: :red)
   end
 
   def select_position_to_move(piece_position)
@@ -53,12 +61,12 @@ class Board
     possible_moves = possible_moves(piece_position)
     user_input = gets.chomp.match(/(\d),(\d)/)
     if user_input.nil?
-      print "invalid input\n"
+      red_output("invalid input\n")
       return select_position_to_move(piece_position)
     end
     selected_position = user_input.captures.map(&:to_i)
     unless possible_moves.any?{|position| position.value == selected_position}
-      print "That is not a possible move"
+      red_output("That is not a possible move")
       return select_position_to_move(piece_position)
     end
     Position.new(selected_position)
