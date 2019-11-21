@@ -6,7 +6,6 @@ class King < Piece
   BEHAVIORS = [
     {
       start_condition: 'none',
-      has_iterator: true,
       iterations: 1,
       directions:
         %w[top

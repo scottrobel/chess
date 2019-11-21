@@ -21,6 +21,18 @@ class Board
     end
   end
 
+  def display_possible_moves(piece_position)
+    possible_moves = possible_moves(piece_position)
+    color_array = default_color_array
+    position_value = piece_position.value
+    color_array[position_value[1]][position_value[0]] = :blue
+    possible_moves.each do |possible_move|
+      move_position = possible_move.value
+      color_array[move_position[1]][move_position[0]] = :green
+    end
+    display_board(color_array)
+  end
+
   def display_board(color_array = default_color_array)
     print "\n"
     board = @game_board.map.with_index do |row, row_index|
@@ -52,7 +64,6 @@ class Board
             new_position.method(next_direction.to_sym).call
           end
           break unless on_board?(position)
-
           value = position_to_value(position)
           if empty_space?(value)
             possible_moves << position
@@ -68,6 +79,7 @@ class Board
         end
       end
     end
+    possible_moves
   end
 
   def test_start_condition(start_condition, piece)
