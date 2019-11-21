@@ -19,16 +19,22 @@ class Pawn < Piece
       iterations: 1,
       take_oponent: true,
       break_before: 'own_piece'
+    },
+    {
+      iterations: 1,
+      take_oponent: false,
+      break_before: 'own_piece'
     }
   ].freeze
   def behaviors
-    binding.pry
     direction_beginning = @color == 'black' ? 'top' : 'bottom'
-    direction_end = ['', '_right', '_left']
+    direction_end = ['', '_right', '_left', '']
     BEHAVIORS.map.with_index do |behavior, index|
       direction = "#{direction_beginning}#{direction_end[index]}"
       behavior[:directions] = [direction]
-      behavior['start_condition'.to_sym] = index == 0 ? 'self_on front_line' : "opponent_on #{direction}"
+      behavior['start_condition'.to_sym] = 'self_on front_line' if index == 0
+      behavior['start_condition'.to_sym] = "opponent_on #{direction}" if index < 3 && index > 0
+      behavior['start_condition'.to_sym] = 'none' if index == 3
       behavior
     end
   end

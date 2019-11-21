@@ -54,7 +54,14 @@ describe Board do
   end
   describe '#display_possible_moves' do
     it 'displays possible pawn moves' do
-      @new_board.send(:display_possible_moves, Position.new([0,7]))
+      @new_board.send(:display_possible_moves, Position.new([0, 1]))
+    end
+  end
+  describe '#make_move' do
+    it 'can move a pawn' do
+      @new_board.send(:make_move, Position.new([0, 1]), Position.new([0,3]))
+      @new_board.send(:display_possible_moves, Position.new([0, 3]))
+      @new_board.send(:display_possible_moves, Position.new([0, 0]))
     end
   end
 end

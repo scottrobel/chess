@@ -13,6 +13,15 @@ class Board
 
   private
 
+  def make_move(position_of_piece, position_to_move)
+    piece = position_to_value(position_of_piece)
+    piece.position = position_to_move
+    start_position_value = position_of_piece.value
+    end_position_value = position_to_move.value
+    @game_board[end_position_value[1]][end_position_value[0]] = piece
+    @game_board[start_position_value[1]][start_position_value[0]] = "\s" * 3
+  end
+
   def default_color_array
     color_array = Array.new(8) do |row_i|
       Array.new(8) do |piece_i|
