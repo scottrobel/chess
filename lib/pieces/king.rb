@@ -16,7 +16,7 @@ class King < Piece
            top_left
            bottom_right
            bottom_left],
-      take_oponent: true,
+      take_opponent: true,
       break_before: 'opponent_moves'
     }
   ].freeze

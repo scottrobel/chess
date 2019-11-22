@@ -84,8 +84,13 @@ describe Board do
     end
   end
   describe '#select_position_to_move' do
-    it 'select a position to move' do
-      @new_board.send(:player_turn, 'black')
+    xit 'select a position to move' do
+      @new_board.send(:play_game)
+    end
+  end
+  describe '#check?' do
+    it 'declares check' do
+      print @new_board.send(:check?, 'black')
     end
   end
 end

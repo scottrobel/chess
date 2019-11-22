@@ -5,7 +5,6 @@ class Queen < Piece
   BEHAVIORS = [
     {
       start_condition: 'none',
-      has_iterator: false,
       directions:
       %w[top
          bottom
@@ -15,10 +14,14 @@ class Queen < Piece
          top_left
          bottom_right
          bottom_left],
-      take_oponent: true,
-      break_before: 'own_piece'
+      take_opponent: true,
     }
   ].freeze
+
+
+  def behaviors
+    BEHAVIORS
+  end
 
   def to_s
     ColorizedString["\s♕\s"].colorize(color: @color.to_sym)

@@ -7,22 +7,22 @@ class Pawn < Piece
   BEHAVIORS = [
     {
       iterations: 2,
-      take_oponent: false,
+      take_opponent: false,
       break_before: 'own_piece'
     },
     {
       iterations: 1,
-      take_oponent: true,
+      take_opponent: true,
       break_before: 'own_piece'
     },
     {
       iterations: 1,
-      take_oponent: true,
+      take_opponent: true,
       break_before: 'own_piece'
     },
     {
       iterations: 1,
-      take_oponent: false,
+      take_opponent: false,
       break_before: 'own_piece'
     }
   ].freeze

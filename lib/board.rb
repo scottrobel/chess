@@ -10,9 +10,24 @@ class Board
     @game_board[7] = back_row('white', 7)
   end
 
+  def play_game
+    player_turn = 'white'
+    loop do
+      player_turn(player_turn)
+      player_turn = player_turn == 'white' ? 'black' : 'white'
+    end
+  end
+
   private
 
+  def find_king(color)
+    @game_board.flatten.find do |piece|
+      piece.class == King && piece.color == color
+    end.position.value
+  end
+
   def player_turn(player_color)
+    red_output("#{player_color}'s turn")
     display_board
     position = select_piece(player_color)
     display_possible_moves(position)
@@ -22,7 +37,7 @@ class Board
   end
 
   def select_piece(player_color)
-    print "\nenter the coordnate of the piece\nthat you would like to move.\n"
+    print "\nenter the coordinate of the piece\nthat you would like to move.\n"
     print "in the format number,number\n"
     print "eg. 5,1\n"
     user_input = gets.chomp.match(/(\d),(\d)/)
@@ -55,7 +70,7 @@ class Board
   end
 
   def select_position_to_move(piece_position)
-    print "\nenter the coordnate you would like to move this piece\n"
+    print "\nenter the coordinate you would like to move this piece\n"
     print "in the format number,number\n"
     print "eg. 5,1\n"
     possible_moves = possible_moves(piece_position)
@@ -176,8 +191,7 @@ class Board
   end
 
   def test_start_condition(start_condition, piece)
-    return true if start_condition == 'none'
-
+    return true if start_condition == 'none' 
     player_color = piece.color
     split_condition = start_condition.split(' ')
     case split_condition[0]
@@ -191,6 +205,8 @@ class Board
       direction = split_condition[1]
       possible_opponent_position = piece.position.method(direction.to_sym).call
       value_of_position = position_to_value(possible_opponent_position)
+      return false unless on_board?(possible_opponent_position)
+      binding.pry if value_of_position.nil?
       return opponent_piece?(value_of_position, player_color)
     end
   end
@@ -204,7 +220,7 @@ class Board
   end
 
   def opponent_piece?(value, player_color)
-    !empty_space?(value) && value.color == !player_color
+    !empty_space?(value) && value.color != player_color
   end
 
   def on_board?(position)

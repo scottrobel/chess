@@ -6,7 +6,7 @@ class Bishop < Piece
     {
       start_condition: 'none',
       directions: %w[top_right top_left bottom_right bottom_left],
-      take_oponent: true
+      take_opponent: true
     }
   ].freeze
 
