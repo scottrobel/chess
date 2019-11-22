@@ -6,7 +6,6 @@ class Rook < Piece
     {
       start_condition: 'none',
       directions: %w[top bottom right left],
-      break_before: 'own_piece',
       take_opponent: true
     }
   ].freeze

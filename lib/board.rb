@@ -11,6 +11,7 @@ class Board
   end
 
   def play_game
+    open_game?
     player_turn = 'white'
     loop do
       player_turn = player_turn == 'white' ? 'black' : 'white'
@@ -19,15 +20,103 @@ class Board
         break
       end
       check_prompt(player_turn) if check?(player_turn)
-      red_output('stale mate') if stale_mate(player_turn)
+      if stale_mate(player_turn)
+        red_output('stale mate')
+        break
+      end
       player_turn(player_turn)
+      break if save_game?
+      system 'clear'
     end
   end
 
   private
 
+  def save_game?
+    red_output("would you like to save this game?")
+    red_output("type s to save")
+    red_output("just press enter to continue")
+    input = gets.chomp
+    if input.match(/s/)
+      save_game
+      true
+    else
+      false
+    end
+  end
+
+  def open_game?
+    red_output("would you like to open a saved game?\n")
+    red_output("press enter to create a new game\nor type yes to open a saved game\n")
+    if gets.chomp.match?(/yes/)
+      display_games
+      red_output("enter the number of the game you would like to open\n")
+      game_number = input_valid_game_number
+      open_saved_game(game_number)
+    end
+  end
+
+  def input_valid_game_number
+    valid_numbers = saved_game_numbers
+    input = gets.chomp.to_i
+    if valid_numbers.include?(input)
+      return input
+    else
+      red_output("that is not a game number")
+      return input_valid_game_number
+    end
+  end
+
+  def save_game
+    Dir.mkdir('./saved_games') unless Dir.exist?('./saved_games')
+    file_number = 0
+    while File.exist?("./saved_games/game_#{file_number}.game")
+      file_number += 1
+    end
+    File.open("./saved_games/game_#{file_number}.game", 'w') do |file|
+      file.write(Marshal.dump(@game_board))
+    end
+  end
+
+  def open_saved_game(game_number)
+    if File.exist?("./saved_games/game_#{game_number}.game")
+      File.open("./saved_games/game_#{game_number}.game", 'r') do |file|
+        @game_board = Marshal.load(file.read)
+      end  
+      true
+    else
+      false
+    end
+  end
+
+  def saved_game_numbers
+    saved_game_numbers = []
+    if Dir.exist?('./saved_games')
+      file_number = 0
+      Dir.each_child('./saved_games') do |file_name|
+        saved_game_numbers << file_name.match(/game_(.+).game/)[1].to_i
+      end
+    end
+    saved_game_numbers
+  end
+
+  def display_games
+    original_board = Marshal.dump(@game_board)
+    if Dir.exist?('./saved_games')
+      file_number = 0
+      Dir.each_child('./saved_games') do |file_name|
+        red_output(file_name)
+        File.open("./saved_games/#{file_name}") do |file|
+          @game_board = Marshal.load(file.read)
+          display_board
+          @game_board = original_board
+          original_board = Marshal.dump(@board)
+        end
+      end
+    end
+  end
+
   def check_prompt(color)
-    binding.pry
     moves_out_of_check = possible_moves_out_of_check(color)
     red_output("There are #{moves_out_of_check.size} possible ways for you to get out of check")
     selected_piece = select_piece(color)
@@ -114,12 +203,15 @@ class Board
   end
 
   def player_turn(player_color)
+    system 'clear'
     red_output("#{player_color}'s turn")
     display_board
     position = select_piece(player_color)
+    system 'clear'
     display_possible_moves(position)
     position_to_move = select_position_to_move(position)
     make_move(position, position_to_move)
+    system 'clear'
     display_board
   end
 
@@ -300,8 +392,6 @@ class Board
       possible_opponent_position = piece.position.method(direction.to_sym).call
       value_of_position = position_to_value(possible_opponent_position)
       return false unless on_board?(possible_opponent_position)
-
-      binding.pry if value_of_position.nil?
       return opponent_piece?(value_of_position, player_color)
     end
   end
