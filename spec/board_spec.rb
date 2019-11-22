@@ -61,16 +61,16 @@ describe Board do
   end
   describe '#player_piece?' do
     it 'returns true if its the players piece' do
-      expect(@new_board.send(:player_piece?, 'black', Position.new([0,0]))).to eql(true)
+      expect(@new_board.send(:player_piece?, 'black', Position.new([0, 0]))).to eql(true)
     end
   end
 
   describe '#piece_moveable' do
     it 'returns false when a rook is trapped' do
-      expect(@new_board.send(:piece_moveable?, Position.new([0,0]))).to eql(false)
+      expect(@new_board.send(:piece_moveable?, Position.new([0, 0]))).to eql(false)
     end
     it 'returns true when a piece is moveable' do
-      expect(@new_board.send(:piece_moveable?, Position.new([0,1]))).to eql(true)
+      expect(@new_board.send(:piece_moveable?, Position.new([0, 1]))).to eql(true)
     end
   end
   describe '#select_piece' do
@@ -80,7 +80,7 @@ describe Board do
   end
   describe '#select_position_to_move' do
     xit 'select a position to move' do
-      @new_board.send(:select_position_to_move, Position.new([0,1]))
+      @new_board.send(:select_position_to_move, Position.new([0, 1]))
     end
   end
   describe '#select_position_to_move' do
@@ -89,13 +89,19 @@ describe Board do
     end
   end
   describe '#check?' do
-    it 'declares check' do
+    xit 'declares check' do
       print @new_board.send(:check?, 'black')
     end
   end
   describe '#all_possible_moves' do
-    it 'returns all possible moves' do
+    xit 'returns all possible moves' do
       print @new_board.send(:all_possible_moves, 'black')
+    end
+  end
+  describe '#king_possible_moves' do
+    it 'returns empty array if unchanges board' do
+      king_moves = @new_board.send(:king_possible_moves, 'black')
+      print "\nking: moves#{king_moves}"
     end
   end
 end

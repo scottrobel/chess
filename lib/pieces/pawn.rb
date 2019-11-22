@@ -33,7 +33,9 @@ class Pawn < Piece
       direction = "#{direction_beginning}#{direction_end[index]}"
       behavior[:directions] = [direction]
       behavior['start_condition'.to_sym] = 'self_on front_line' if index == 0
-      behavior['start_condition'.to_sym] = "opponent_on #{direction}" if index < 3 && index > 0
+      if index < 3 && index > 0
+        behavior['start_condition'.to_sym] = "opponent_on #{direction}"
+      end
       behavior['start_condition'.to_sym] = 'none' if index == 3
       behavior
     end

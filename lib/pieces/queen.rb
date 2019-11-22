@@ -14,10 +14,9 @@ class Queen < Piece
          top_left
          bottom_right
          bottom_left],
-      take_opponent: true,
+      take_opponent: true
     }
   ].freeze
-
 
   def behaviors
     BEHAVIORS
