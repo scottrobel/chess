@@ -12,7 +12,7 @@ class Board
 
   def play_game
     player_turn = 'white'
-    until check?('white') || check?('black')
+    loop do
       player_turn(player_turn)
       player_turn = player_turn == 'white' ? 'black' : 'white'
     end
