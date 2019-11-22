@@ -84,13 +84,18 @@ describe Board do
     end
   end
   describe '#select_position_to_move' do
-    xit 'select a position to move' do
+    it 'select a position to move' do
       @new_board.send(:play_game)
     end
   end
   describe '#check?' do
     it 'declares check' do
       print @new_board.send(:check?, 'black')
+    end
+  end
+  describe '#all_possible_moves' do
+    it 'returns all possible moves' do
+      print @new_board.send(:all_possible_moves, 'black')
     end
   end
 end

@@ -12,13 +12,29 @@ class Board
 
   def play_game
     player_turn = 'white'
-    loop do
+    until check?('white') || check?('black')
       player_turn(player_turn)
       player_turn = player_turn == 'white' ? 'black' : 'white'
     end
   end
 
   private
+
+  def check?(player_color)
+    opponent_color = player_color == 'black' ? 'white' : 'black'
+    king_position = find_king(player_color)
+    opponent_possible_moves = all_possible_moves(opponent_color)
+    opponent_possible_moves.include?(king_position)
+  end
+
+  def all_possible_moves(color)
+    player_positions = @game_board.flatten.select do |value|
+      value.class != String && value.color ==  color
+    end.map(&:position)
+    possible_moves = player_positions.map do |position|
+      possible_moves(position).map(&:value)
+    end.flatten(1).uniq
+  end
 
   def find_king(color)
     @game_board.flatten.find do |piece|
