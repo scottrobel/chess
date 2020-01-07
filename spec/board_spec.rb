@@ -99,7 +99,7 @@ describe Board do
     end
   end
   describe '#king_possible_moves' do
-    it 'returns empty array if unchanges board' do
+    it 'returns empty array if unchanged board' do
       king_moves = @new_board.send(:king_possible_moves, 'black')
       print "\nking: moves#{king_moves}"
     end
