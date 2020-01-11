@@ -5,8 +5,10 @@ clone this repository
 
 go into the folder and open the terminal
 
-in terminal use ruby play_game.rb
-
+in terminal run
+```
+ruby play_game.rb
+```
 start playing!
 
 This is a fully constrained command line chess game.
