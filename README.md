@@ -26,4 +26,3 @@ Features
 6. Declare if a piece is movable before a player selects it.
 
 7. I also used some metaprogramming to declare methods to one position in relationship to another 
-\
