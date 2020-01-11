@@ -1,6 +1,7 @@
 To play
 You must have ruby installed on your pc to play
 
+
 clone this repository
 go into the folder and open the terminal
 in terminal use ruby play_game.rb
