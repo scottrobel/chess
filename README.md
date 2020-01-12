@@ -7,6 +7,8 @@ go into the folder and open the terminal
 
 in terminal run
 ```
+git clone git@github.com:scottrobel/chess.git
+cd ./chess
 ruby play_game.rb
 ```
 start playing!
