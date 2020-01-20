@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'colorized_string'
-require 'pry'
 require './lib/position'
 require './lib/pieces/piece'
 require './lib/pieces/pawn'
