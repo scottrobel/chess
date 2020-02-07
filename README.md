@@ -9,6 +9,7 @@ in terminal run
 ```
 git clone git@github.com:scottrobel/chess.git
 cd ./chess
+bundle install
 ruby play_game.rb
 ```
 start playing!
