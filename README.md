@@ -13,6 +13,17 @@ bundle install
 ruby play_game.rb
 ```
 start playing!
+This will program will only let you select pieces that are movable.
+
+![Chess](https://i.ibb.co/wpW6R3Z/Capture.png)
+
+The game will show you where you can move after you have selected what piece to move.
+
+![Selected](https://i.ibb.co/7Chpm7Z/selected.png)
+
+After you make a move you are given the option to save your game to a file.
+
+![Save](https://i.ibb.co/TB7THGs/savegame.png)
 
 This is a fully constrained command line chess game.
 
