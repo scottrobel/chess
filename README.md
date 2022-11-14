@@ -1,19 +1,4 @@
-To play
-You must have ruby installed on your pc to play
 
-clone this repository
-
-go into the folder and open the terminal
-
-in terminal run
-```
-git clone git@github.com:scottrobel/chess.git
-cd ./chess
-bundle install
-ruby play_game.rb
-```
-start playing!
-This will program will only let you select pieces that are movable.
 
 ![Chess](https://i.ibb.co/wpW6R3Z/Capture.png)
 
